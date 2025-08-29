@@ -1,0 +1,36 @@
+{% schema %}
+{
+  "name": "Ecom Product Grid",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ecom Product Grid"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="ecom-grid">
+  {% if section.settings.collection %}
+    {% assign products = collections[section.settings.collection].products %}
+    <div class="ecom-grid-wrapper">
+      {% for product in products %}
+        <div class="ecom-card">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: '500x' }}" alt="{{ product.title }}">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No collection selected</p>
+  {% endif %}
+</div>
