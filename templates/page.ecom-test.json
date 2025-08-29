@@ -2,12 +2,19 @@
   "sections": {
     "banner": {
       "type": "ecom-banner",
-      "settings": {}
+      "settings": {
+        "heading": "Welcome to Our Test Store",
+        "subheading": "Check out our exclusive products",
+        "image": "shopify://shop_images/banner.jpg"
+      }
     },
-    "products": {
+    "product_grid": {
       "type": "ecom-product-grid",
-      "settings": {}
+      "settings": {
+        "title": "Featured Products",
+        "products_to_show": 8
+      }
     }
   },
-  "order": ["banner", "grid"]
+  "order": ["banner", "product_grid"]
 }

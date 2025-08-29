@@ -1,28 +1,60 @@
+<section class="ecom-banner">
+  <div class="banner-wrapper">
+    {% if section.settings.image != blank %}
+      <img
+        class="banner-bg"
+        src="{{ section.settings.image | image_url: width: 2400 }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        loading="eager"
+      >
+    {% endif %}
+
+    <div class="banner-text page-width">
+      {% if section.settings.kicker != blank %}
+        <p class="ecom-kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="ecom-heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      {% if section.settings.subheading != blank %}
+        <p class="ecom-subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+
+      <div class="ecom-cta-wrap">
+        {% if section.settings.cta1_label != blank %}
+          <a class="ecom-btn ecom-btn--shine" href="{{ section.settings.cta1_link }}">
+            <span class="ecom-btn__content">{{ section.settings.cta1_label }}</span>
+          </a>
+        {% endif %}
+        {% if section.settings.cta2_label != blank %}
+          <a class="ecom-btn ecom-btn--outline ecom-btn--shine" href="{{ section.settings.cta2_link }}">
+            <span class="ecom-btn__content">{{ section.settings.cta2_label }}</span>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
 {% schema %}
 {
   "name": "Ecom Banner",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "banner_image",
-      "label": "Banner Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_banner_image",
-      "label": "Mobile Banner Image"
-    },
-    {
-      "type": "text",
-      "id": "banner_heading",
-      "label": "Heading",
-      "default": "Find the ideal gift for your loved ones."
-    }
+    { "type": "image_picker", "id": "image", "label": "Background image" },
+    { "type": "text", "id": "image_alt", "label": "Background alt", "default": "Banner" },
+
+    { "type": "text", "id": "kicker", "label": "Top label (red box 1)", "default": "NEW COLLECTION" },
+    { "type": "text", "id": "heading", "label": "Main heading (red box 2)", "default": "Style for Every Season" },
+    { "type": "textarea", "id": "subheading", "label": "Subtitle (red box 3)", "default": "Premium fits, everyday comfort." },
+
+    { "type": "text", "id": "cta1_label", "label": "Primary button text", "default": "Shop now" },
+    { "type": "url",  "id": "cta1_link",  "label": "Primary button link" },
+
+    { "type": "text", "id": "cta2_label", "label": "Secondary button text", "default": "Explore" },
+    { "type": "url",  "id": "cta2_link",  "label": "Secondary button link" }
   ],
-  "presets": [
-    {
-      "name": "Ecom Banner"
-    }
-  ]
+  "presets": [{ "name": "Ecom Banner" }]
 }
 {% endschema %}

@@ -1,71 +1,92 @@
-<div class="ecom-product-grid">
-  {% if section.settings.heading != blank %}
-    <h2 class="ecom-grid-heading">{{ section.settings.heading }}</h2>
+<section class="ecom-product-grid page-width" data-section-id="{{ section.id }}">
+  {% if section.settings.title != blank %}
+    <h2 class="ecom-grid__title">{{ section.settings.title }}</h2>
   {% endif %}
 
-  {% if section.settings.collection != blank %}
-    {% assign collection = collections[section.settings.collection] %}
-    
-    <div class="ecom-grid">
-      {% for product in collection.products limit: section.settings.limit %}
-        <div class="ecom-grid-item">
-          <a href="{{ product.url }}" class="ecom-product-card">
-            <div class="ecom-product-image">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+  <div class="ecom-grid__wrap">
+    {% for block in section.blocks %}
+      {% assign p = block.settings.product %}
+      {% if p != blank %}
+        <article class="ecom-card" data-quick-view>
+          <div class="ecom-card__media">
+            {% if p.featured_media %}
+              <img
+                loading="lazy"
+                src="{{ p.featured_media | image_url: width: 700 }}"
+                width="{{ p.featured_media.width }}"
+                height="{{ p.featured_media.height }}"
+                alt="{{ p.featured_media.alt | escape }}"
+              >
+            {% endif %}
+          </div>
+          <div class="ecom-card__info">
+            <h3 class="ecom-card__title">{{ p.title }}</h3>
+            <p class="ecom-card__price">
+              {% if p.price_varies %}
+                From {{ p.price_min | money }}
+              {% else %}
+                {{ p.price | money }}
               {% endif %}
-            </div>
-            <div class="ecom-product-info">
-              <h3>{{ product.title }}</h3>
-              <p>{{ product.price | money }}</p>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
+            </p>
+          </div>
+
+          {%- comment -%} Product JSON for popup {%- endcomment -%}
+          <script type="application/json" class="ProductJson">
+            {{ p | json }}
+          </script>
+        </article>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  {%- comment -%} Single modal instance {%- endcomment -%}
+  <div class="ecom-modal" hidden>
+    <div class="ecom-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="ecomModalTitle">
+      <button class="ecom-modal__close" data-close>&times;</button>
+      <div class="ecom-modal__left">
+        <img class="ecom-modal__img" alt="">
+      </div>
+      <div class="ecom-modal__right">
+        <h3 id="ecomModalTitle" class="ecom-modal__title"></h3>
+        <p class="ecom-modal__price"></p>
+        <p class="ecom-modal__desc"></p>
+
+        <div class="ecom-modal__options" data-options></div>
+
+        <button class="ecom-btn ecom-btn--fill" data-add-to-cart>
+          <span class="ecom-btn__content">Add to Cart</span>
+        </button>
+        <p class="ecom-modal__status" aria-live="polite"></p>
+      </div>
     </div>
-  {% else %}
-    <p>No collection selected</p>
-  {% endif %}
-</div>
+    <div class="ecom-modal__backdrop" data-close></div>
+  </div>
+
+  {%- if section.settings.upsell_product != blank -%}
+    <script type="application/json" class="UpsellJson" data-upsell-json>
+      {{ section.settings.upsell_product | json }}
+    </script>
+  {%- endif -%}
+</section>
 
 {% schema %}
 {
   "name": "Ecom Product Grid",
   "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "Trending Products" },
+    { "type": "product", "id": "upsell_product", "label": "Auto-add product (Soft Winter Jacket)" }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Our Products"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Select Collection"
-    },
-    {
-      "type": "range",
-      "id": "limit",
-      "label": "Number of products",
-      "min": 2,
-      "max": 12,
-      "step": 1,
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "products_per_row",
-      "label": "Products per row",
-      "min": 2,
-      "max": 4,
-      "step": 1,
-      "default": 4
+      "type": "product_item",
+      "name": "Product",
+      "limit": 6,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Select product" }
+      ]
     }
   ],
-  "presets": [
-    {
-      "name": "Ecom Product Grid"
-    }
-  ]
+  "max_blocks": 6,
+  "presets": [{ "name": "Ecom Product Grid (6)" }]
 }
 {% endschema %}
