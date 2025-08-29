@@ -9,5 +9,5 @@
       "settings": {}
     }
   },
-  "order": ["banner", "products"]
+  "order": ["banner", "grid"]
 }
