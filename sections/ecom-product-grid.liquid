@@ -1,3 +1,33 @@
+<div class="ecom-product-grid">
+  {% if section.settings.heading != blank %}
+    <h2 class="ecom-grid-heading">{{ section.settings.heading }}</h2>
+  {% endif %}
+
+  {% if section.settings.collection != blank %}
+    {% assign collection = collections[section.settings.collection] %}
+    
+    <div class="ecom-grid">
+      {% for product in collection.products limit: section.settings.limit %}
+        <div class="ecom-grid-item">
+          <a href="{{ product.url }}" class="ecom-product-card">
+            <div class="ecom-product-image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+              {% endif %}
+            </div>
+            <div class="ecom-product-info">
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.price | money }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>No collection selected</p>
+  {% endif %}
+</div>
+
 {% schema %}
 {
   "name": "Ecom Product Grid",
