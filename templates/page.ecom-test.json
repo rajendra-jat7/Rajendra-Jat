@@ -1,12 +1,13 @@
 {
-  "name": "Ecom Test",
   "sections": {
-    "main": {
-      "type": "main-page",
+    "banner": {
+      "type": "ecom-banner",
+      "settings": {}
+    },
+    "products": {
+      "type": "ecom-product-grid",
       "settings": {}
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["banner", "products"]
 }
