@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "ecom-banner",
+      "settings": {}
+    },
+    "grid": {
+      "type": "ecom-product-grid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "grid"
+  ]
+}
