@@ -1,46 +1,87 @@
+{% comment %}
+------------------------------------------------------------
+Ecom Banner Section
+- Desktop:
+  - Top image (full width)
+  - Bottom section: left text + right image
+- Mobile:
+  - Only one mobile image
+------------------------------------------------------------
+{% endcomment %}
+
 <div class="ecom-banner">
-  <!-- Desktop View -->
-  <div class="ecom-banner-desktop">
-    {% if section.settings.top_image != blank %}
-      <img src="{{ section.settings.top_image | image_url }}" alt="Top Banner" class="ecom-banner-top">
-    {% endif %}
+  <!-- Top Banner (Desktop only) -->
+  {% if section.settings.top_image != blank %}
+    <div class="banner-desktop-top hidden-mobile">
+      <img 
+        src="{{ section.settings.top_image | img_url: 'master' }}" 
+        alt="Top Banner" 
+        class="w-full h-auto"
+      >
+    </div>
+  {% endif %}
 
-    <div class="ecom-banner-bottom-wrapper">
-      {% if section.settings.bottom_image != blank %}
-        <img src="{{ section.settings.bottom_image | image_url }}" alt="Bottom Banner" class="ecom-banner-bottom">
+  <!-- Bottom Banner with Text (Desktop only) -->
+  <div class="banner-desktop-bottom hidden-mobile">
+    <div class="banner-left-text">
+      {% if section.settings.banner_text != blank %}
+        <h2>{{ section.settings.banner_text }}</h2>
       {% endif %}
-
-      <div class="ecom-banner-text">
-        <h2>{{ section.settings.heading }}</h2>
-        <p>{{ section.settings.subheading }}</p>
-      </div>
+    </div>
+    <div class="banner-right-img">
+      {% if section.settings.bottom_image != blank %}
+        <img 
+          src="{{ section.settings.bottom_image | img_url: 'master' }}" 
+          alt="Bottom Banner" 
+          class="w-full h-auto"
+        >
+      {% endif %}
     </div>
   </div>
 
-  <!-- Mobile View -->
-  <div class="ecom-banner-mobile">
-    {% if section.settings.mobile_image != blank %}
-      <img src="{{ section.settings.mobile_image | image_url }}" alt="Mobile Banner" class="ecom-banner-mobile-img">
-    {% endif %}
-    <div class="ecom-banner-text-mobile">
-      <h2>{{ section.settings.heading }}</h2>
-      <p>{{ section.settings.subheading }}</p>
+  <!-- Mobile Banner -->
+  {% if section.settings.mobile_image != blank %}
+    <div class="banner-mobile hidden-desktop">
+      <img 
+        src="{{ section.settings.mobile_image | img_url: 'master' }}" 
+        alt="Mobile Banner" 
+        class="w-full h-auto"
+      >
     </div>
-  </div>
+  {% endif %}
 </div>
 
 {% schema %}
 {
   "name": "Ecom Banner",
   "settings": [
-    { "type": "image_picker", "id": "top_image", "label": "Top Banner Image" },
-    { "type": "image_picker", "id": "bottom_image", "label": "Bottom Banner Image" },
-    { "type": "image_picker", "id": "mobile_image", "label": "Mobile Banner Image" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The Gift Guide" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season." }
+    {
+      "type": "image_picker",
+      "id": "top_image",
+      "label": "Top Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom Banner Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "banner_text",
+      "label": "Banner Text",
+      "default": "Find the ideal gift for your loved ones."
+    }
   ],
   "presets": [
-    { "name": "Ecom Banner" }
+    {
+      "name": "Ecom Banner",
+      "category": "Custom Sections"
+    }
   ]
 }
 {% endschema %}

@@ -51,86 +51,42 @@
 
 .ecom-banner {
   width: 100%;
-  margin: 0 auto;
 }
 
-.ecom-banner-top {
-  width: 100%;
-  display: block;
+/* Desktop only */
+.hidden-mobile { display: block; }
+.hidden-desktop { display: none; }
+
+.banner-desktop-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.ecom-banner-bottom-wrapper {
-  position: relative;
-  width: 100%;
+.banner-left-text {
+  flex: 1;
 }
 
-.ecom-banner-bottom {
-  width: 100%;
-  display: block;
+.banner-right-img {
+  flex: 1;
 }
 
-.ecom-banner-text {
-  position: absolute;
-  top: 50%;
-  left: 8%;
-  transform: translateY(-50%);
-  color: #111;
-  max-width: 35%;
+/* Mobile only */
+@media (max-width: 768px) {
+  .hidden-mobile { display: none; }
+  .hidden-desktop { display: block; }
 }
-
-.ecom-banner-text h2 {
-  font-size: 2.5rem;
-  margin-bottom: 12px;
-  font-weight: 600;
-}
-
-.ecom-banner-text p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-/* Mobile View */
-.ecom-banner-desktop {
-  display: block;
-}
-
-.ecom-banner-mobile {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
-  .ecom-banner-desktop {
-    display: none;
-  }
-
-  .ecom-banner-mobile {
-    display: block;
-    position: relative;
-  }
-
-  .ecom-banner-mobile-img {
-    width: 100%;
-    display: block;
-  }
-
-  .ecom-banner-text-mobile {
-    position: absolute;
-    bottom: 12%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #fff;
-    max-width: 90%;
-    padding: 0 10px;
-  }
-
-  .ecom-banner-text-mobile h2 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-  }
-
-  .ecom-banner-text-mobile p {
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-}
+    .banner-desktop-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .banner-left-text, .banner-right-img {
+        flex: unset;
+    }
+    
+    .banner-right-img img {
+        max-width: 100%;
+        height: auto;
+    }
