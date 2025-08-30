@@ -1,18 +1,7 @@
-{% comment %}
-------------------------------------------------------------
-Ecom Banner Section
-- Desktop:
-  - Top image (full width)
-  - Bottom section: left text + right image
-- Mobile:
-  - Only one mobile image
-------------------------------------------------------------
-{% endcomment %}
-
 <div class="ecom-banner">
   <!-- Top Banner (Desktop only) -->
   {% if section.settings.top_image != blank %}
-    <div class="banner-desktop-top hidden-mobile">
+    <div class="banner-desktop-top small-hide">
       <img 
         src="{{ section.settings.top_image | img_url: 'master' }}" 
         alt="Top Banner" 
@@ -22,7 +11,7 @@ Ecom Banner Section
   {% endif %}
 
   <!-- Bottom Banner with Text (Desktop only) -->
-  <div class="banner-desktop-bottom hidden-mobile">
+  <div class="banner-desktop-bottom small-hide">
     <div class="banner-left-text">
       {% if section.settings.banner_text != blank %}
         <h2>{{ section.settings.banner_text }}</h2>
@@ -41,7 +30,7 @@ Ecom Banner Section
 
   <!-- Mobile Banner -->
   {% if section.settings.mobile_image != blank %}
-    <div class="banner-mobile hidden-desktop">
+    <div class="banner-mobile large-up-hide">
       <img 
         src="{{ section.settings.mobile_image | img_url: 'master' }}" 
         alt="Mobile Banner" 
