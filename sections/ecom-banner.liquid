@@ -4,192 +4,196 @@
   "settings": [
     {
       "type": "image_picker",
-      "id": "top_image",
-      "label": "Top Background Image"
+      "id": "top_banner_image",
+      "label": "Top Banner Image"
     },
     {
       "type": "image_picker",
       "id": "bottom_right_image",
       "label": "Bottom Right Image"
     }
-  ],
-  "presets": [
-    {
-      "name": "Homepage Banner"
-    }
   ]
 }
 {% endschema %}
 
-<section id="homepage-banner-{{ section.id }}" class="homepage-banner">
-
+<div class="homepage-banner">
   <!-- Top Header Bar -->
-  <div class="banner-topbar">
-    <div class="topbar-left">TISSO VISON</div>
-    <div class="topbar-center">Find the ideal gift for your loved ones.</div>
-    <div class="topbar-right">
-      <a href="/collections/all" class="btn-yellow">CHOOSE GIFT →</a>
+  <div class="top-header-bar">
+    <div class="header-left">TISSO VISION</div>
+    <div class="header-center">Find the ideal gift for your loved ones.</div>
+    <div class="header-right">
+      <a href="#" class="btn-yellow">CHOOSE GIFT →</a>
     </div>
   </div>
 
-  <!-- Hero Banner -->
-  <div class="banner-hero" 
-       style="background-image: url('{{ section.settings.top_image | image_url: width: 2000 }}');">
-    
-    <!-- Text Overlay -->
-    <div class="banner-content">
-      <h1 class="hero-heading">The Gift Guide</h1>
-      <p class="hero-text">
-        Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated 
-        selection and find the perfect gifts to delight your loved ones this holiday season.
-      </p>
-      <a href="/collections/all" class="btn-black">SHOP NOW →</a>
+  <!-- Banner Content -->
+  <div class="banner-content">
+    <div class="top-banner-container">
+      {% if section.settings.top_banner_image != blank %}
+        <img src="{{ section.settings.top_banner_image | image_url: width: 1600 }}" alt="Top Banner" class="top-banner-img">
+      {% endif %}
+
+      <div class="banner-text">
+        <h1>The Gift Guide</h1>
+        <p>
+          Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.
+        </p>
+        <a href="#" class="btn-black">SHOP NOW →</a>
+      </div>
     </div>
 
-    <!-- Bottom Right Image -->
     {% if section.settings.bottom_right_image != blank %}
-      <img 
-        src="{{ section.settings.bottom_right_image | image_url: width: 600 }}" 
-        alt="Banner Side Image" 
-        class="banner-bottom-right" />
+      <img src="{{ section.settings.bottom_right_image | image_url: width: 600 }}" alt="Bottom Right Image" class="bottom-right-img">
     {% endif %}
-
   </div>
 
   <!-- Footer Strip -->
-  <div class="banner-footer">
+  <div class="footer-strip">
     SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL
   </div>
-
-</section>
+</div>
 
 <style>
-/* ---------- GENERAL LAYOUT ---------- */
-.homepage-banner {
-  width: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  font-family: inherit;
-}
-
-/* ---------- TOP HEADER BAR ---------- */
-.banner-topbar {
+/* ---------- HEADER BAR ---------- */
+.top-header-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 30px;
-  font-size: 1rem;
   background: #fff;
+  padding: 10px 20px;
+  font-size: 0.95rem;
   border-bottom: 1px solid #eee;
 }
-.topbar-left {
+.header-left {
   font-weight: bold;
-  font-size: 1.2rem;
 }
-.topbar-center {
+.header-center {
   text-align: center;
   flex: 1;
-  color: #333;
 }
-.topbar-right {
-  text-align: right;
-}
-
-/* ---------- HERO SECTION ---------- */
-.banner-hero {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  min-height: 600px;
-  display: flex;
-  align-items: flex-end;
-  padding: 40px;
-  color: #000;
+.header-right .btn-yellow {
+  background: #FFD700;
+  color: black;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
+/* ---------- BANNER CONTENT ---------- */
 .banner-content {
-  max-width: 550px;
-  margin-bottom: 40px;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  padding: 20px;
 }
-.hero-heading {
+
+.top-banner-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.top-banner-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.banner-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  max-width: 500px;
+}
+.banner-text h1 {
   font-size: 3rem;
   font-weight: bold;
-  margin-bottom: 15px;
-  color: #000;
+  margin: 0 0 12px;
 }
-.hero-text {
-  font-size: 1.2rem;
+.banner-text p {
+  font-size: 1rem;
+  margin: 0 0 16px;
   line-height: 1.5;
-  color: #333;
+}
+.btn-black {
+  background: black;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* ---------- BOTTOM RIGHT IMAGE ---------- */
-.banner-bottom-right {
+.bottom-right-img {
   position: absolute;
   bottom: 0;
   right: 0;
-  max-width: 400px;
-  width: 30%;
+  max-width: 280px;
   height: auto;
+  object-fit: contain;
 }
 
 /* ---------- FOOTER STRIP ---------- */
-.banner-footer {
-  text-align: center;
-  padding: 10px;
-  color: red;
-  font-weight: bold;
-  font-size: 0.9rem;
+.footer-strip {
   background: #fff;
-}
-
-/* ---------- BUTTONS ---------- */
-.btn-yellow {
-  background: #FFD700;
-  color: #000;
-  padding: 10px 18px;
-  border-radius: 4px;
+  color: red;
+  text-align: center;
   font-weight: bold;
-  text-decoration: none;
-}
-.btn-yellow:hover { background: #e6c200; }
-
-.btn-black {
-  background: #000;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 4px;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 20px;
-}
-.btn-black:hover { background: #333; }
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 1024px) {
-  .hero-heading { font-size: 2.4rem; }
-  .banner-content { margin-bottom: 20px; }
-  .banner-bottom-right { width: 40%; }
+  padding: 12px 10px;
+  border-top: 1px solid #eee;
 }
 
-@media (max-width: 768px) {
-  .banner-topbar {
-    flex-direction: column;
-    gap: 10px;
+/* ---------- RESPONSIVE (MOBILE) ---------- */
+@media screen and (max-width: 768px) {
+  /* Header changes */
+  .top-header-bar {
+    justify-content: space-between;
+  }
+  .header-left {
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .header-left::before {
+    content: "☰ ";
+    font-size: 1.2rem;
+  }
+  .header-center {
+    font-weight: bold;
+  }
+  .header-right {
+    display: none;
+  }
+
+  /* Banner changes */
+  .top-banner-container {
+    display: none; /* hide top image on mobile */
+  }
+  .bottom-right-img {
+    position: static;
+    display: block;
+    margin: 20px auto 0;
+    max-width: 100%;
+  }
+  .banner-text {
+    position: static;
     text-align: center;
+    padding: 10px;
   }
-  .banner-hero {
-    padding: 20px;
-    min-height: 450px;
-    align-items: flex-end;
+  .banner-text h1 {
+    font-size: 2rem;
   }
-  .hero-heading { font-size: 2rem; }
-  .hero-text { font-size: 1rem; }
-  .banner-bottom-right {
-    width: 50%;
-    right: 10px;
+  .banner-text p {
+    margin: 12px auto;
+    max-width: 90%;
+  }
+  .btn-black {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 </style>
