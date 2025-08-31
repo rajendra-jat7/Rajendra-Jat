@@ -17,10 +17,6 @@
               {{ p.featured_media | image_url: width: 800 | image_tag: loading: 'lazy', alt: p.title }}
             {%- endif -%}
           </div>
-          <div class="ecom-card__info">
-            <h3 class="ecom-card__title">{{ p.title }}</h3>
-            <p class="ecom-card__price">{{ p.price | money }}</p>
-          </div>
         </button>
         <script type="application/json" class="ProductJson" data-handle="{{ p.handle }}">{{ p | json }}</script>
       </article>
