@@ -1,25 +1,44 @@
-<section class="ecom-banner">
-  <!-- Desktop -->
+<section id="ecom-banner-{{ section.id }}" class="ecom-banner">
+  <!-- Desktop / Tablet -->
   <div class="ecom-banner__desktop">
     {% if section.settings.top_image %}
       <div class="ecom-banner__top">
-        <img src="{{ section.settings.top_image | image_url: width: 1600 }}" alt="Top Banner" />
+        <img class="ecom-banner__img" src="{{ section.settings.top_image | image_url: width: 3200 }}" alt="{{ section.settings.top_image.alt | escape }}">
+        {% if section.settings.top_center_text != blank %}
+          <div class="ecom-banner__top-center">{{ section.settings.top_center_text }}</div>
+        {% endif %}
+        {% if section.settings.top_cta_label != blank %}
+          <a class="ecom-banner__top-cta cta-anim" href="{{ section.settings.top_cta_url }}">
+            {{ section.settings.top_cta_label }}
+            <span class="cta-anim__arrow">→</span>
+          </a>
+        {% endif %}
       </div>
     {% endif %}
 
     <div class="ecom-banner__bottom">
       {% if section.settings.bottom_image %}
-        <div class="ecom-banner__bottom-image">
-          <img src="{{ section.settings.bottom_image | image_url: width: 1600 }}" alt="Bottom Banner" />
-        </div>
+        <img class="ecom-banner__img" src="{{ section.settings.bottom_image | image_url: width: 3200 }}" alt="{{ section.settings.bottom_image.alt | escape }}">
       {% endif %}
 
-      <div class="ecom-banner__text">
+      <div class="ecom-banner__content">
+        {% if section.settings.kicker != blank %}
+          <p class="ecom-banner__kicker">{{ section.settings.kicker }}</p>
+        {% endif %}
         {% if section.settings.heading != blank %}
-          <h2>{{ section.settings.heading }}</h2>
+          <h2 class="ecom-banner__heading">{{ section.settings.heading }}</h2>
         {% endif %}
         {% if section.settings.subheading != blank %}
-          <p>{{ section.settings.subheading }}</p>
+          <div class="ecom-banner__sub rte">{{ section.settings.subheading }}</div>
+        {% endif %}
+        {% if section.settings.bottom_cta_label != blank %}
+          <a class="ecom-banner__cta cta-anim" href="{{ section.settings.bottom_cta_url }}">
+            {{ section.settings.bottom_cta_label }}
+            <span class="cta-anim__arrow">→</span>
+          </a>
+        {% endif %}
+        {% if section.settings.ribbon_text != blank %}
+          <div class="ecom-banner__ribbon">{{ section.settings.ribbon_text }}</div>
         {% endif %}
       </div>
     </div>
@@ -28,9 +47,89 @@
   <!-- Mobile -->
   <div class="ecom-banner__mobile">
     {% if section.settings.mobile_image %}
-      <img src="{{ section.settings.mobile_image | image_url: width: 900 }}" alt="Mobile Banner" />
+      <img class="ecom-banner__img" src="{{ section.settings.mobile_image | image_url: width: 1600 }}" alt="{{ section.settings.mobile_image.alt | escape }}">
     {% endif %}
+
+    <div class="ecom-banner__mobile-content">
+      {% if section.settings.kicker != blank %}
+        <p class="ecom-banner__kicker">{{ section.settings.kicker }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h2 class="ecom-banner__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <div class="ecom-banner__sub rte">{{ section.settings.subheading }}</div>
+      {% endif %}
+      {% if section.settings.bottom_cta_label != blank %}
+        <a class="ecom-banner__cta cta-anim" href="{{ section.settings.bottom_cta_url }}">
+          {{ section.settings.bottom_cta_label }}
+          <span class="cta-anim__arrow">→</span>
+        </a>
+      {% endif %}
+      {% if section.settings.ribbon_text != blank %}
+        <div class="ecom-banner__ribbon">{{ section.settings.ribbon_text }}</div>
+      {% endif %}
+    </div>
   </div>
+
+  <style>
+    /* Scope to this section */
+    #ecom-banner-{{ section.id }}{
+      --accent: {{ section.settings.accent_color }};
+      --text: {{ section.settings.text_color }};
+      --pad: clamp(12px,2.5vw,28px);
+    }
+    #ecom-banner-{{ section.id }} .ecom-banner__img{ width:100%; height:auto; display:block; }
+
+    /* Top block */
+    #ecom-banner-{{ section.id }} .ecom-banner__top{ position:relative; }
+    #ecom-banner-{{ section.id }} .ecom-banner__top-center{
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      background:rgba(255,255,255,.92); color:var(--text);
+      padding:8px 16px; border:2px solid var(--accent); border-radius:4px; font-size:14px; text-align:center;
+      max-width:min(90%, 640px);
+    }
+    #ecom-banner-{{ section.id }} .ecom-banner__top-cta{
+      position:absolute; top:10px; right:10px; background:#ffe45c; color:#111;
+      padding:12px 18px; border:2px solid var(--accent); border-radius:6px; text-decoration:none; font-weight:700;
+    }
+
+    /* Bottom block */
+    #ecom-banner-{{ section.id }} .ecom-banner__bottom{ position:relative; }
+    #ecom-banner-{{ section.id }} .ecom-banner__content{
+      position:absolute; left:3%; bottom:6%; max-width:560px; color:var(--text);
+    }
+    #ecom-banner-{{ section.id }} .ecom-banner__kicker{ margin:0 0 6px; font-weight:700; letter-spacing:.02em; }
+    #ecom-banner-{{ section.id }} .ecom-banner__heading{ margin:0 0 14px; font-size:clamp(32px,6vw,72px); line-height:1.05; font-weight:800; }
+    #ecom-banner-{{ section.id }} .ecom-banner__sub{
+      margin:0 0 18px; background:rgba(255,255,255,.92); color:#111; border:2px solid var(--accent);
+      padding:16px 18px; border-radius:6px; max-width:560px;
+    }
+
+    #ecom-banner-{{ section.id }} .ecom-banner__cta{
+      display:inline-flex; align-items:center; gap:10px; padding:14px 22px;
+      border:2px solid var(--accent); border-radius:6px; text-decoration:none; background:#fff; color:#111; font-weight:700;
+      position:relative; overflow:hidden;
+    }
+    /* CTA animation */
+    #ecom-banner-{{ section.id }} .cta-anim::before{
+      content:""; position:absolute; inset:0; background:var(--accent); transform:translateX(-100%); transition:transform .35s ease; z-index:0;
+    }
+    #ecom-banner-{{ section.id }} .cta-anim:hover::before{ transform:translateX(0); }
+    #ecom-banner-{{ section.id }} .cta-anim, 
+    #ecom-banner-{{ section.id }} .cta-anim *{ position:relative; z-index:1; }
+    #ecom-banner-{{ section.id }} .cta-anim__arrow{ transition:transform .35s ease; }
+    #ecom-banner-{{ section.id }} .cta-anim:hover .cta-anim__arrow{ transform:translateX(4px); }
+
+    /* Mobile stack */
+    #ecom-banner-{{ section.id }} .ecom-banner__mobile{ display:none; padding:0 var(--pad) var(--pad); }
+    #ecom-banner-{{ section.id }} .ecom-banner__mobile-content{ max-width:720px; margin:12px auto 0; }
+
+    @media (max-width: 990px){
+      #ecom-banner-{{ section.id }} .ecom-banner__desktop{ display:none; }
+      #ecom-banner-{{ section.id }} .ecom-banner__mobile{ display:block; }
+    }
+  </style>
 </section>
 
 {% schema %}
@@ -38,10 +137,21 @@
   "name": "Ecom Banner",
   "settings": [
     { "type": "image_picker", "id": "top_image", "label": "Top Image" },
+    { "type": "text", "id": "top_center_text", "label": "Top center small text", "default": "Find the ideal gift for your loved ones." },
+    { "type": "text", "id": "top_cta_label", "label": "Top right button label", "default": "CHOOSE GIFT" },
+    { "type": "url", "id": "top_cta_url", "label": "Top right button link" },
+
     { "type": "image_picker", "id": "bottom_image", "label": "Bottom Image" },
+    { "type": "text", "id": "kicker", "label": "Kicker (small label)", "default": "" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "The Gift Guide" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season." },
-    { "type": "image_picker", "id": "mobile_image", "label": "Mobile Image" }
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.</p>" },
+    { "type": "text", "id": "bottom_cta_label", "label": "Bottom button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "bottom_cta_url", "label": "Bottom button link" },
+    { "type": "text", "id": "ribbon_text", "label": "Bottom ribbon text", "default": "SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL" },
+
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile Image" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#ff2a2a" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" }
   ],
   "presets": [{ "name": "Ecom Banner" }]
 }
