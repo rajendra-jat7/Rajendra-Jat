@@ -50,7 +50,7 @@
 }
 
 /* Product Grid */
-.ecom-product-grid{
+.ecom-product-grid {
     padding: 20px 0;
 }
 
@@ -73,27 +73,29 @@
     object-fit: cover;
 }
 
-.text-tisso{
-   font: Lustria;
-   font-weight: 400;
-   font-size: 36px;
-   line-height: 120%; 
-   padding-left: 20px;
+.text-tisso {
+    font: Lustria;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 120%;
+    padding-left: 20px;
 }
 
 /* Mobile size override */
 @media(max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(169px, 1fr));
-    gap: 10px;
-  }
-  .product-card {
-    width: 169px;
-    height: 186px;
-  }
-  .text-tisso{
-    font-size: 24px;
-    line-height: 120%;
-    text-align: center;
-  }
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(169px, 1fr));
+        gap: 10px;
+    }
+
+    .product-card {
+        width: 169px;
+        height: 186px;
+    }
+
+    .text-tisso {
+        font-size: 24px;
+        line-height: 120%;
+        text-align: center;
+    }
 }

@@ -3,16 +3,18 @@
     "banner": {
       "type": "ecom-banner",
       "settings": {
-        "heading": "Welcome to Our Test Store",
-        "subheading": "Check out our exclusive products",
-        "image": "shopify://shop_images/banner.jpg"
+        "top_image": "shopify://shop_images/top-banner.jpg",
+        "bottom_image": "shopify://shop_images/bottom-banner.jpg",
+        "heading": "The Gift Guide",
+        "subheading": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.",
+        "mobile_image": "shopify://shop_images/mobile-banner.jpg"
       }
     },
     "product_grid": {
       "type": "ecom-product-grid",
       "settings": {
         "title": "Featured Products",
-        "products_to_show": 8
+        "products_to_show": 6
       }
     }
   },
