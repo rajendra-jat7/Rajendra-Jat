@@ -124,12 +124,12 @@
     background: #fff;
 }
 
-.ecom-card__media img {
+/* .ecom-card__media img {
     width: 100%;
     height: auto;
     display: block;
     transition: transform .3s ease;
-}
+} */
 
 .ecom-card:hover .ecom-card__media img {
     transform: scale(1.04);
@@ -141,15 +141,6 @@
     gap: 6px;
 }
 
-.ecom-card__title {
-    margin: 0;
-    font-size: 16px;
-}
-
-.ecom-card__price {
-    margin: 0;
-    opacity: .9;
-}
 
 /* ==== Modal ==== */
 .ecom-modal[hidden] {
