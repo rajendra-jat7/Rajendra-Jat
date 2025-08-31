@@ -23,6 +23,7 @@
 
 <div class="homepage-banner">
   <!-- Top Header Bar -->
+  <button id="hbMenuBtn" class="hb-hamburger" aria-label="Open menu">&#9776;</button>
   <div class="top-header-bar">
     <div class="header-left">
     {% if section.settings.header-left != blank %}
@@ -101,6 +102,11 @@
   text-decoration: none;
 }
 
+
+.header-center, .header-right {
+  display: none !important;
+}
+
 /* ---------- BANNER CONTENT ---------- */
 .banner-content {
   width: 100%;
@@ -171,41 +177,95 @@
   justify-content: center;
 }
 
-/* Mobile Specific Fixes */
 @media screen and (max-width: 768px) {
-  /* Hide "Find the ideal gift..." */
-  .header-text, .header-right {
+  /* ---- HEADER ---- */
+  .top-header-bar {
+    position: relative;
+    justify-content: center;
+    padding: 10px 40px;
+  }
+
+  /* Hamburger left me */
+  .hb-hamburger {
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Hide center text + right button */
+  .header-center, .header-right {
     display: none !important;
   }
 
-  /* Banner text reposition */
+  /* Logo center */
+  .header-left {
+    margin: 0 auto;
+  }
+
+  /* ---- BANNER ---- */
+  .top-banner-container {
+    display: none; /* top banner image hide */
+  }
+
   .bottom-banner-container {
-    position: relative;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    position: relative;
+    padding: 0 10px;
+  }
+
+  /* Text block upar */
+  .bottom-text {
+    order: 1;
+    padding: 10px;
+  }
+
+  .bottom-text h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .bottom-text p {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 12px;
+  }
+
+  /* Image neeche (main banner) */
+  .bottom-right-img {
+    order: 2;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    object-fit: contain;
   }
 
   /* SHOP NOW overlay on image */
   .btn-black {
     position: absolute;
-    bottom: 20px;   /* adjust as needed */
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    margin: 0;
     z-index: 2;
+    margin: 0;
+    padding: 12px 22px;
+    border-radius: 6px;
   }
 
-  /* Ensure image is behind */
-  .bottom-right-img {
-    width: 100%;
+  /* Footer strip smaller */
+  .footer-strip {
+    font-size: 12px;
+    padding: 8px 4px;
     height: auto;
-    display: block;
-  }
-
-  /* Move heading + paragraph above image */
-  .bottom-text {
-    padding: 15px;
-    margin-bottom: 0;
   }
 }
+
 
 </style>
