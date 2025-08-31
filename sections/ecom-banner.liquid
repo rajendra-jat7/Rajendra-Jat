@@ -1,45 +1,21 @@
 {% schema %}
 {
-  "name": "Ecom Banner",
+  "name": "Homepage Banner",
   "settings": [
     {
       "type": "image_picker",
       "id": "header-left",
-      "label": "Header Left Logo"
-    },
-    {
-      "type": "text",
-      "id": "header-center",
-      "label": "Header Center Text",
-      "default": "Find the ideal gift for your loved ones."
-    },
-    {
-      "type": "text",
-      "id": "header-right-text",
-      "label": "Header Right Button Text",
-      "default": "CHOOSE GIFT →"
+      "label": "Header Left Image"
     },
     {
       "type": "image_picker",
-      "id": "banner-top",
-      "label": "Banner Top Image"
+      "id": "top_banner_image",
+      "label": "Top Banner Image"
     },
     {
       "type": "image_picker",
-      "id": "banner-bottom",
-      "label": "Banner Bottom Image"
-    },
-    {
-      "type": "text",
-      "id": "banner-text",
-      "label": "Banner Text",
-      "default": "This is banner text"
-    },
-    {
-      "type": "text",
-      "id": "banner-button",
-      "label": "Banner Button Text",
-      "default": "Shop Now"
+      "id": "bottom_right_image",
+      "label": "Bottom Right Image"
     }
   ]
 }
@@ -49,6 +25,7 @@
   <!-- Top Header Bar -->
   <div class="top-header-bar">
     <button id="hbMenuBtn" class="hb-hamburger" aria-label="Open menu">&#9776;</button>
+    <button id="hbCloseBtn" class="hb-close" aria-label="Close menu">&times;</button>
     <div class="header-left">
       {% if section.settings.header-left != blank %}
         <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
@@ -56,90 +33,107 @@
              class="header-left-img">
       {% endif %}
     </div>
-    <div class="header-center">{{ section.settings.header-center }}</div>
+    <div class="header-center">Find the ideal gift for your loved ones.</div>
     <div class="header-right">
-      <a href="#" class="btn-yellow">{{ section.settings.header-right-text }}</a>
+      <a href="#" class="btn-yellow">CHOOSE GIFT →</a>
     </div>
   </div>
 
-  <!-- Overlay Menu -->
+  <!-- Fullscreen Menu Overlay -->
   <div id="hbOverlay" class="hb-overlay" hidden>
-    <button id="hbCloseBtn" class="hb-close" aria-label="Close menu">&times;</button>
     <div class="hb-overlay-content">
-      {% if section.settings.header-left != blank %}
-        <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
-             alt="Header Left" 
-             class="header-left-img">
-      {% endif %}
-      <p class="hb-text">{{ section.settings.header-center }}</p>
-      <a href="#" class="btn-yellow">{{ section.settings.header-right-text }}</a>
+      <div class="overlay-logo">
+        {% if section.settings.header-left != blank %}
+          <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
+               alt="Header Logo" 
+               class="header-left-img">
+        {% endif %}
+      </div>
+      <p class="overlay-text">Find the ideal gift for your loved ones.</p>
+      <a href="#" class="btn-yellow overlay-btn">CHOOSE GIFT →</a>
     </div>
   </div>
 
   <!-- Banner Content -->
   <div class="banner-content">
-    {% if section.settings.banner-top != blank %}
-      <img src="{{ section.settings.banner-top | image_url: width: 1600 }}" 
-           alt="Banner Top" 
-           class="banner-top-img">
-    {% endif %}
 
-    <div class="banner-bottom-wrapper">
-      {% if section.settings.banner-bottom != blank %}
-        <img src="{{ section.settings.banner-bottom | image_url: width: 1600 }}" 
-             alt="Banner Bottom" 
-             class="banner-bottom-img">
+    <!-- Top Banner Section -->
+    <div class="top-banner-container">
+      {% if section.settings.top_banner_image != blank %}
+        <img src="{{ section.settings.top_banner_image | image_url: width: 1600 }}" 
+             alt="Top Banner" 
+             class="top-banner-img">
       {% endif %}
+    </div>
 
-      <div class="banner-text-block">
-        <h2>{{ section.settings.banner-text }}</h2>
-        <a href="#" class="btn-yellow">{{ section.settings.banner-button }}</a>
+    <!-- Bottom Banner Section -->
+    <div class="bottom-banner-container">
+      <div class="bottom-text">
+        <h1>The Gift Guide</h1>
+        <p>
+          Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.
+        </p>
+        <a href="#" class="btn-black">SHOP NOW →</a>
       </div>
+
+      {% if section.settings.bottom_right_image != blank %}
+        <img src="{{ section.settings.bottom_right_image | image_url: width: 890 }}" 
+             alt="Bottom Right Image" 
+             class="bottom-right-img">
+      {% endif %}
+    </div>
+
+    <!-- Footer Strip -->
+    <div class="strip-desktop footer-strip">
+      SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL
+    </div>
+    <div class="strip-mobile footer-strip">
+      SUSTAINABLE, ETHICALLY MADE ACTIVEWEAR
     </div>
   </div>
 </div>
 
 <style>
-/* ---------- TOP HEADER ---------- */
+/* ---------- HEADER BAR ---------- */
 .top-header-bar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
-  background: #fff;
-  position: relative;
-  border-bottom: 1px solid #eee;
+  align-items: center;
+  background: #F5F5F5;
+  padding: 10px 50px;
+  height: 64px;
+  font-size: 16px;
+}
+.header-left {
+  font-weight: bold;
+}
+.header-center {
+  text-align: center;
+  flex: 1;
+}
+.header-right .btn-yellow {
+  background: #FFF544;
+  color: black;
+  font-weight: 16px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 .hb-hamburger {
-  font-size: 24px;
+  display: none;
+}
+.hb-close {
+  display: none;
+  font-size: 28px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.header-center {
-  flex: 1;
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.btn-yellow {
-  background: #FFF544;
-  color: black;
-  padding: 10px 18px;
-  border-radius: 4px;
-  font-weight: 500;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: transform 0.3s ease;
-}
-.btn-yellow:hover {
-  transform: scale(1.05);
-}
-
-/* ---------- OVERLAY MENU ---------- */
+/* ---------- OVERLAY ---------- */
 .hb-overlay {
   position: fixed;
   top: 0;
@@ -148,88 +142,224 @@
   height: 100%;
   background: white;
   z-index: 9999;
-  display: none; /* <-- default hidden */
-  flex-direction: column;
+  display: flex;
   align-items: center;
-  justify-content: start;
-  padding: 30px 20px;
+  justify-content: center;
+  flex-direction: column;
 }
-
-.hb-overlay.active {
-  display: flex; /* <-- visible only when active */
-}
-
-.hb-close {
-  position: absolute;
-  left: 15px;
-  top: 20px;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
 .hb-overlay-content {
-  margin-top: 40px;
   text-align: center;
+  padding: 20px;
+}
+.hb-overlay .overlay-logo {
+  margin-bottom: 20px;
+}
+.hb-overlay .overlay-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.hb-overlay .overlay-btn {
+  padding: 10px 20px;
+  border-radius: 4px;
 }
 
-.hb-text {
-  margin: 20px 0;
-  font-size: 16px;
-}
-
-/* ---------- BANNER ---------- */
+/* ---------- BANNER CONTENT ---------- */
 .banner-content {
-  margin-top: 20px;
+  width: 100%;
+}
+
+.top-banner-container {
+  height : 390px;
   text-align: center;
+  overflow : hidden;
+  width: 100%;
+  max-width: 1440px;
 }
 
-.banner-top-img {
-  width: 100%;
-  height: auto;
+.top-banner-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
   display: block;
 }
 
-.banner-bottom-wrapper {
-  position: relative;
-  margin-top: 20px;
+/* Bottom Banner */
+.bottom-banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 403px;
 }
 
-.banner-bottom-img {
-  width: 100%;
-  height: auto;
+.bottom-text {
+  flex: 1;
+  padding-left:30px;
+}
+
+.bottom-text h1 {
+  font-size: 70px;
+  font-weight: 500;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.bottom-text p {
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.btn-black {
+  display: inline-block;
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.bottom-right-img {
+  width: 890px;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------- FOOTER STRIP ---------- */
+.strip-desktop {
   display: block;
+  height: 34px;
+  font: Jost;
+  font-weight: 400;
+  line-height: 13.5px;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.banner-text-block {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  text-align: left;
+.strip-mobile{
+    display: none;
 }
 
-.banner-text-block h2 {
-  font-size: 28px;
-  margin-bottom: 12px;
+@media screen and (max-width: 768px) {
+  /* ---- HEADER ---- */
+  .top-header-bar {
+    position: relative;
+    justify-content: center;
+    padding: 10px 40px;
+  }
+
+  /* Hamburger left me */
+  .hb-hamburger, .hb-close {
+    display: block;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .hb-close {
+    display: none;
+  }
+
+  /* Hide center text + right button */
+  .header-center, .header-right {
+    display: none !important;
+  }
+
+  /* Logo center */
+  .header-left {
+    margin: 0 auto;
+  }
+
+  /* ---- BANNER ---- */
+  .top-banner-container {
+    display: none; /* top banner image hide */
+  }
+
+  .bottom-banner-container {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    text-align: center;
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    padding: 10px;
+  }
+
+  /* Text block upar */
+  .bottom-text {
+    order: 1;
+    padding: 10px;
+  }
+
+  .bottom-text h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .bottom-text p {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  /* Image neeche (main banner) */
+  .bottom-right-img {
+    order: 2;
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+    transform: scale(1.5);
+    object-fit: contain;
+  }
+
+  /* SHOP NOW overlay on image */
+  .btn-black {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    margin: 0;
+    padding: 12px 22px;
+    border-radius: 6px;
+  }
+
+  /* Footer strip smaller */
+  .strip-mobile {
+    display: block;
+    font-size: 12px;
+    padding: 8px 4px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: Jost;
+    font-weight: 400;
+    line-height: 13.5px;
+    background: #F5F5F5;
+  }
+
+  .strip-desktop{
+    display: none;
+  }
 }
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById("hbMenuBtn");
-  const overlay = document.getElementById("hbOverlay");
-  const closeBtn = document.getElementById("hbCloseBtn");
+document.addEventListener('DOMContentLoaded', () => {
+  const menuBtn = document.getElementById('hbMenuBtn');
+  const closeBtn = document.getElementById('hbCloseBtn');
+  const overlay = document.getElementById('hbOverlay');
 
-  menuBtn.addEventListener("click", () => {
-    overlay.classList.add("active");
-    menuBtn.style.display = "none";
-  });
-
-  closeBtn.addEventListener("click", () => {
-    overlay.classList.remove("active");
-    menuBtn.style.display = "block";
-  });
+  if (menuBtn && closeBtn && overlay) {
+    menuBtn.addEventListener('click', () => {
+      overlay.hidden = false;
+      menuBtn.style.display = 'none';
+      closeBtn.style.display = 'block';
+    });
+    closeBtn.addEventListener('click', () => {
+      overlay.hidden = true;
+      menuBtn.style.display = 'block';
+      closeBtn.style.display = 'none';
+    });
+  }
 });
 </script>
