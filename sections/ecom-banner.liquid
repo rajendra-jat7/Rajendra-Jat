@@ -39,20 +39,20 @@
     </div>
   </div>
 
-  <!-- Fullscreen Menu Overlay -->
-  <div id="hbOverlay" class="hb-overlay" hidden>
-    <div class="hb-overlay-content">
-      <div class="overlay-logo">
-        {% if section.settings.header-left != blank %}
-          <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
-               alt="Header Logo" 
-               class="header-left-img">
-        {% endif %}
-      </div>
-      <p class="overlay-text">Find the ideal gift for your loved ones.</p>
-      <a href="#" class="btn-yellow overlay-btn">CHOOSE GIFT →</a>
+<!-- Fullscreen Menu Overlay -->
+<div id="hbOverlay" class="hb-overlay">
+  <div class="hb-overlay-content">
+    <div class="overlay-logo">
+      {% if section.settings.header-left != blank %}
+        <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
+             alt="Header Logo" 
+             class="header-left-img">
+      {% endif %}
     </div>
+    <p class="overlay-text">Find the ideal gift for your loved ones.</p>
+    <a href="#" class="btn-yellow overlay-btn">CHOOSE GIFT →</a>
   </div>
+</div>
 
   <!-- Banner Content -->
   <div class="banner-content">
