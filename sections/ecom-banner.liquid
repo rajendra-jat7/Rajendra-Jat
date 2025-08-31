@@ -106,6 +106,8 @@
 }
 .header-left {
   font-weight: bold;
+  position: relative;
+  z-index: 1;
 }
 .header-center {
   text-align: center;
@@ -257,10 +259,11 @@
   /* Hamburger left me */
   .hb-hamburger, .hb-close {
     display: block;
-    position: absolute;
+    position: relative;
     font-size : 28px;
     background : none;
     border: none;
+    z-index: 1000;
     cursor : pointer;
     left: 15px;
     top: 50%;
@@ -278,6 +281,8 @@
   /* Logo center */
   .header-left {
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   /* ---- BANNER ---- */
