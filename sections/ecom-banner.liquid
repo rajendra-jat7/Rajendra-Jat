@@ -5,12 +5,7 @@
     {
       "type": "image_picker",
       "id": "header-left",
-      "label": "Header Left Image (Logo/Hamburger Icon)"
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_logo",
-      "label": "Mobile Logo"
+      "label": "Header Left Image"
     },
     {
       "type": "image_picker",
@@ -27,15 +22,14 @@
 {% endschema %}
 
 <div class="homepage-banner">
-
-  <!-- Top Header Bar (Desktop) -->
-  <div class="top-header-bar desktop-only">
+  <!-- Top Header Bar -->
+  <div class="top-header-bar">
     <div class="header-left">
-      {% if section.settings.header-left != blank %}
-        <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
-             alt="Header Left" 
-             class="header-left-img">
-      {% endif %}
+    {% if section.settings.header-left != blank %}
+      <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
+           alt="Header Left" 
+           class="header-left-img">
+    {% endif %}
     </div>
     <div class="header-center">Find the ideal gift for your loved ones.</div>
     <div class="header-right">
@@ -43,164 +37,175 @@
     </div>
   </div>
 
-  <!-- Mobile Navbar -->
-  <div class="mobile-header mobile-only">
-    <button id="menuBtn" class="hamburger">&#9776;</button>
-    {% if section.settings.mobile_logo != blank %}
-      <img src="{{ section.settings.mobile_logo | image_url: width: 150 }}" 
-           alt="Mobile Logo" 
-           class="mobile-logo">
-    {% endif %}
-  </div>
-
-  <!-- Mobile Overlay Menu -->
-  <div id="mobileMenu" class="overlay-menu">
-    <button id="closeBtn" class="close">&times;</button>
-    {% if section.settings.mobile_logo != blank %}
-      <img src="{{ section.settings.mobile_logo | image_url: width: 150 }}" 
-           alt="Mobile Logo" 
-           class="overlay-logo">
-    {% endif %}
-    <p>Find the ideal gift for your loved ones.</p>
-    <a href="#" class="btn-yellow">CHOOSE GIFT →</a>
-  </div>
-
   <!-- Banner Content -->
-  <div class="banner-content">
+<div class="banner-content">
 
-    <!-- Top Banner Section -->
-    <div class="top-banner-container">
-      {% if section.settings.top_banner_image != blank %}
-        <img src="{{ section.settings.top_banner_image | image_url: width: 1600 }}" 
-             alt="Top Banner" 
-             class="top-banner-img">
-      {% endif %}
+  <!-- Top Banner Section -->
+  <div class="top-banner-container">
+    {% if section.settings.top_banner_image != blank %}
+      <img src="{{ section.settings.top_banner_image | image_url: width: 1600 }}" 
+           alt="Top Banner" 
+           class="top-banner-img">
+    {% endif %}
+  </div>
+
+  <!-- Bottom Banner Section -->
+  <div class="bottom-banner-container">
+    <div class="bottom-text">
+      <h1>The Gift Guide</h1>
+      <p>
+        Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.
+      </p>
+      <a href="#" class="btn-black">SHOP NOW →</a>
     </div>
 
-    <!-- Bottom Banner Section -->
-    <div class="bottom-banner-container">
-      <div class="bottom-text">
-        <h1>The Gift Guide</h1>
-        <p>
-          Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season.
-        </p>
-        <a href="#" class="btn-black">SHOP NOW →</a>
-      </div>
+    {% if section.settings.bottom_right_image != blank %}
+      <img src="{{ section.settings.bottom_right_image | image_url: width: 890 }}" 
+           alt="Bottom Right Image" 
+           class="bottom-right-img">
+    {% endif %}
+  </div>
 
-      {% if section.settings.bottom_right_image != blank %}
-        <img src="{{ section.settings.bottom_right_image | image_url: width: 890 }}" 
-             alt="Bottom Right Image" 
-             class="bottom-right-img">
-      {% endif %}
-    </div>
-
-    <!-- Footer Strip -->
-    <div class="footer-strip">
-      SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL
-    </div>
+  <!-- Footer Strip -->
+  <div class="footer-strip">
+    SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL
   </div>
 </div>
 
 <style>
-/* ---------- DESKTOP ---------- */
-.desktop-only { display: flex; }
-.mobile-only { display: none; }
-
-/* ---------- MOBILE NAV ---------- */
-.mobile-header {
+/* ---------- HEADER BAR ---------- */
+.top-header-bar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 12px 20px;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: relative;
-  z-index: 1000;
-}
-.mobile-header .hamburger {
-  position: absolute;
-  left: 15px;
-  font-size: 26px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.mobile-logo {
-  max-height: 30px;
-}
-
-/* Overlay menu */
-.overlay-menu {
-  position: fixed;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transition: left 0.3s ease-in-out;
-  z-index: 2000;
-  text-align: center;
-}
-.overlay-menu.active { left: 0; }
-.overlay-menu .close {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.overlay-logo {
-  max-height: 40px;
-  margin-bottom: 20px;
-}
-.overlay-menu p {
+  background: #F5F5F5;
+  padding: 10px 50px;
+  height: 64px;
   font-size: 16px;
-  margin-bottom: 15px;
 }
-.overlay-menu .btn-yellow {
-  background: #FFF544;
-  padding: 12px 25px;
-  border: none;
+.header-left {
   font-weight: bold;
-  text-decoration: none;
-  text-transform: uppercase;
+}
+.header-center {
+  text-align: center;
+  flex: 1;
+}
+.header-right .btn-yellow {
+  background: #FFF544;
   color: black;
+  font-weight: 16px;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 768px) {
-  .desktop-only { display: none; }
-  .mobile-only { display: flex; }
+/* ---------- BANNER CONTENT ---------- */
+.banner-content {
+  width: 100%;
+}
 
-  .bottom-banner-container {
-    flex-direction: column;
-    text-align: center;
-    height: auto;
+.top-banner-container {
+  height : 390px;
+  text-align: center;
+  overflow : hidden;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.top-banner-img {
+  max-width: 100%;
+  max-height: 100%
+  object-fit: cover;
+  display: block;
+}
+
+/* Bottom Banner */
+.bottom-banner-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 403px;
+}
+
+.bottom-text {
+  flex: 1;
+  padding-left:30px;
+}
+
+.bottom-text h1 {
+  font-size: 70px;
+  font-weight: 500;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.bottom-text p {
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.btn-black {
+  display: inline-block;
+  padding: 10px 20px;
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.bottom-right-img {
+  width: 890px;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---------- FOOTER STRIP ---------- */
+.footer-strip {
+  height: 34px;
+  font: Jost;
+  font-weight: 400;
+  line-height: 13.5px;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile Specific Fixes */
+@media screen and (max-width: 768px) {
+  /* Hide "Find the ideal gift..." */
+  .header-text, .header-right {
+    display: none !important;
   }
+
+  /* Banner text reposition */
+  .bottom-banner-container {
+    position: relative;
+    text-align: center;
+  }
+
+  /* SHOP NOW overlay on image */
+  .btn-black {
+    position: absolute;
+    bottom: 20px;   /* adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 2;
+  }
+
+  /* Ensure image is behind */
   .bottom-right-img {
     width: 100%;
     height: auto;
+    display: block;
   }
-  .bottom-text h1 { font-size: 32px; }
+
+  /* Move heading + paragraph above image */
+  .bottom-text {
+    padding: 15px;
+    margin-bottom: 0;
+  }
 }
+
 </style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const menuBtn = document.getElementById("menuBtn");
-  const closeBtn = document.getElementById("closeBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
-
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.classList.add("active");
-  });
-
-  closeBtn.addEventListener("click", () => {
-    mobileMenu.classList.remove("active");
-  });
-});
-</script>
