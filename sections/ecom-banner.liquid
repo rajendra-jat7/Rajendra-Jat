@@ -142,11 +142,17 @@
   height: 100%;
   background: white;
   z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: none; /* <-- default hidden */
   flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 30px 20px;
 }
+
+.hb-overlay.active {
+  display: flex; /* <-- visible only when active */
+}
+
 .hb-overlay-content {
   text-align: center;
   padding: 20px;
@@ -344,22 +350,19 @@
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const menuBtn = document.getElementById('hbMenuBtn');
-  const closeBtn = document.getElementById('hbCloseBtn');
-  const overlay = document.getElementById('hbOverlay');
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("hbMenuBtn");
+  const overlay = document.getElementById("hbOverlay");
+  const closeBtn = document.getElementById("hbCloseBtn");
 
-  if (menuBtn && closeBtn && overlay) {
-    menuBtn.addEventListener('click', () => {
-      overlay.hidden = false;
-      menuBtn.style.display = 'none';
-      closeBtn.style.display = 'block';
-    });
-    closeBtn.addEventListener('click', () => {
-      overlay.hidden = true;
-      menuBtn.style.display = 'block';
-      closeBtn.style.display = 'none';
-    });
-  }
+  menuBtn.addEventListener("click", () => {
+    overlay.classList.add("active");
+    menuBtn.style.display = "none";
+  });
+
+  closeBtn.addEventListener("click", () => {
+    overlay.classList.remove("active");
+    menuBtn.style.display = "block";
+  });
 });
 </script>
