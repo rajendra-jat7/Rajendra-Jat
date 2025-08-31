@@ -124,55 +124,6 @@
   text-decoration: none;
 }
 
-.hb-hamburger {
-  display: none;
-}
-.hb-close {
-  display: none;
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* ---------- OVERLAY ---------- */
-.hb-overlay {
-  position: fixed;
-  top: 35%;
-  left: 0;
-  width: 100%;
-  height: auto;
-  background: white;
-  z-index: 9999;
-  display: none; /* <-- default hidden */
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-  padding: 30px 20px;
-}
-
-.hb-overlay.active {
-  display: flex; /* <-- visible only when active */
-  max-height: auto;
-  overflow: hidden;
-}
-
-.hb-overlay-content {
-  text-align: center;
-  padding: 20px;
-}
-.hb-overlay .overlay-logo {
-  margin-bottom: 20px;
-}
-.hb-overlay .overlay-text {
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-.hb-overlay .overlay-btn {
-  padding: 10px 20px;
-  border-radius: 4px;
-}
-
 /* ---------- BANNER CONTENT ---------- */
 .banner-content {
   width: 100%;
@@ -259,7 +210,7 @@
   /* Hamburger left me */
   .hb-hamburger, .hb-close {
     display: block;
-    position: relative;
+    position: absolute;
     font-size : 28px;
     background : none;
     border: none;
@@ -277,6 +228,55 @@
   .header-center, .header-right {
     display: none !important;
   }
+
+  .hb-hamburger {
+  display: none;
+}
+.hb-close {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- OVERLAY ---------- */
+.hb-overlay {
+  position: fixed;
+  top: 35%;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: white;
+  z-index: 9999;
+  display: none; /* <-- default hidden */
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 30px 20px;
+}
+
+.hb-overlay.active {
+  display: flex; /* <-- visible only when active */
+  max-height: auto;
+  overflow: hidden;
+}
+
+.hb-overlay-content {
+  text-align: center;
+  padding: 20px;
+}
+.hb-overlay .overlay-logo {
+  margin-bottom: 20px;
+}
+.hb-overlay .overlay-text {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.hb-overlay .overlay-btn {
+  padding: 10px 20px;
+  border-radius: 4px;
+}
 
   /* Logo center */
   .header-left {
