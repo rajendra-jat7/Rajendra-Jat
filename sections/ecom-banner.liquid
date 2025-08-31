@@ -19,7 +19,13 @@
 <div class="homepage-banner">
   <!-- Top Header Bar -->
   <div class="top-header-bar">
-    <div class="header-left">TISSO VISION</div>
+    <div class="header-left">
+    {% if section.settings.header-left != blank %}
+      <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
+           alt="Header Left" 
+           class="header-left-img">
+    {% endif %}
+    </div>
     <div class="header-center">Find the ideal gift for your loved ones.</div>
     <div class="header-right">
       <a href="#" class="btn-yellow">CHOOSE GIFT →</a>
