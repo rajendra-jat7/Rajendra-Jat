@@ -1,5 +1,28 @@
-<section id="ecom-banner-{{ section.id }}" class="homepage-banner">
-  
+{% schema %}
+{
+  "name": "Homepage Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "top_image",
+      "label": "Top Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_right_image",
+      "label": "Bottom Right Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Banner"
+    }
+  ]
+}
+{% endschema %}
+
+<section id="homepage-banner-{{ section.id }}" class="homepage-banner">
+
   <!-- Top Header Bar -->
   <div class="banner-topbar">
     <div class="topbar-left">TISSO VISON</div>
@@ -9,8 +32,11 @@
     </div>
   </div>
 
-  <!-- Hero Banner Section -->
-  <div class="banner-hero">
+  <!-- Hero Banner -->
+  <div class="banner-hero" 
+       style="background-image: url('{{ section.settings.top_image | image_url: width: 2000 }}');">
+    
+    <!-- Text Overlay -->
     <div class="banner-content">
       <h1 class="hero-heading">The Gift Guide</h1>
       <p class="hero-text">
@@ -19,6 +45,15 @@
       </p>
       <a href="/collections/all" class="btn-black">SHOP NOW →</a>
     </div>
+
+    <!-- Bottom Right Image -->
+    {% if section.settings.bottom_right_image != blank %}
+      <img 
+        src="{{ section.settings.bottom_right_image | image_url: width: 600 }}" 
+        alt="Banner Side Image" 
+        class="banner-bottom-right" />
+    {% endif %}
+
   </div>
 
   <!-- Footer Strip -->
@@ -29,7 +64,16 @@
 </section>
 
 <style>
-/* -------- TOP HEADER BAR -------- */
+/* ---------- GENERAL LAYOUT ---------- */
+.homepage-banner {
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* ---------- TOP HEADER BAR ---------- */
 .banner-topbar {
   display: flex;
   justify-content: space-between;
@@ -39,11 +83,68 @@
   background: #fff;
   border-bottom: 1px solid #eee;
 }
-.topbar-left { font-weight: bold; font-size: 1.2rem; }
-.topbar-center { text-align: center; flex: 1; color: #333; }
-.topbar-right { text-align: right; }
+.topbar-left {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.topbar-center {
+  text-align: center;
+  flex: 1;
+  color: #333;
+}
+.topbar-right {
+  text-align: right;
+}
 
-/* Buttons */
+/* ---------- HERO SECTION ---------- */
+.banner-hero {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  min-height: 600px;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  color: #000;
+}
+
+.banner-content {
+  max-width: 550px;
+  margin-bottom: 40px;
+}
+.hero-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #000;
+}
+.hero-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* ---------- BOTTOM RIGHT IMAGE ---------- */
+.banner-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  max-width: 400px;
+  width: 30%;
+  height: auto;
+}
+
+/* ---------- FOOTER STRIP ---------- */
+.banner-footer {
+  text-align: center;
+  padding: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+  background: #fff;
+}
+
+/* ---------- BUTTONS ---------- */
 .btn-yellow {
   background: #FFD700;
   color: #000;
@@ -53,6 +154,7 @@
   text-decoration: none;
 }
 .btn-yellow:hover { background: #e6c200; }
+
 .btn-black {
   background: #000;
   color: #fff;
@@ -65,45 +167,29 @@
 }
 .btn-black:hover { background: #333; }
 
-/* -------- HERO SECTION -------- */
-.banner-hero {
-  background: url('{{ "4.webp" | file_url }}') center/cover no-repeat; 
-  text-align: center;
-  padding: 80px 20px;
-}
-.banner-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-.hero-heading {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #000;
-}
-.hero-text {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: #444;
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1024px) {
+  .hero-heading { font-size: 2.4rem; }
+  .banner-content { margin-bottom: 20px; }
+  .banner-bottom-right { width: 40%; }
 }
 
-/* -------- FOOTER STRIP -------- */
-.banner-footer {
-  text-align: center;
-  padding: 10px;
-  color: red;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-/* -------- RESPONSIVE -------- */
 @media (max-width: 768px) {
   .banner-topbar {
     flex-direction: column;
     gap: 10px;
     text-align: center;
   }
+  .banner-hero {
+    padding: 20px;
+    min-height: 450px;
+    align-items: flex-end;
+  }
   .hero-heading { font-size: 2rem; }
   .hero-text { font-size: 1rem; }
+  .banner-bottom-right {
+    width: 50%;
+    right: 10px;
+  }
 }
 </style>
