@@ -91,11 +91,13 @@
   flex: 1;
 }
 .header-right .btn-yellow {
-  background: #FFD700;
+  background: #FFF544;
   color: black;
+  font-weight: 16px;
   padding: 8px 14px;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 400;
+  text-transform: uppercase;
   text-decoration: none;
 }
 
@@ -169,54 +171,59 @@
   justify-content: center;
 }
 
-/* ---------- RESPONSIVE (MOBILE) ---------- */
+/* Mobile Responsive */
 @media screen and (max-width: 768px) {
-  /* Header changes */
-  .top-header-bar {
-    justify-content: space-between;
-  }
-  .header-left {
-    font-size: 1.4rem;
-    cursor: pointer;
-  }
-  .header-left::before {
-    content: "☰ ";
-    font-size: 1.2rem;
-  }
-  .header-center {
-    font-weight: bold;
-  }
-  .header-right {
+  /* Hide top banner */
+  .top-banner-container {
     display: none;
   }
 
-  /* Banner changes */
-  .top-banner-container {
-    display: none; /* hide top image on mobile */
-  }
-  .bottom-right-img {
-    position: static;
-    display: block;
-    margin: 20px auto 0;
-    max-width: 100%;
-  }
-  .banner-text {
-    position: static;
+  /* Bottom container stacked */
+  .bottom-banner-container {
+    flex-direction: column;
     text-align: center;
+    height: auto;
     padding: 10px;
   }
-  .banner-text h1 {
-    font-size: 2rem;
+
+  /* Text block above image */
+  .bottom-text {
+    padding: 0 15px;
+    margin-bottom: 15px;
   }
-  .banner-text p {
-    margin: 12px auto;
-    max-width: 90%;
+  .bottom-text h1 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
   }
+  .bottom-text p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+
+  /* Shop button centered */
   .btn-black {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 0 auto 15px auto;
+    display: inline-block;
+  }
+
+  /* Image full width */
+  .bottom-right-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Sustainability strip */
+  .sustain-strip {
+    height: auto;
+    padding: 8px;
+  }
+  .sustain-strip p {
+    font-size: 12px;
+    text-align: center;
   }
 }
+
 </style>
