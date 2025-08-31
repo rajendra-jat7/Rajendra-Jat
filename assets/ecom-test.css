@@ -1,296 +1,70 @@
-/* ==== Helpers ==== */
-.page-width {
-    width: min(1200px, 100% - 32px);
-    margin-inline: auto;
-}
-
-/* ==== Banner base ==== */
-.ecom-banner {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-
-.ecom-banner-desktop {
+/* Banner */
+.ecom-banner__desktop {
     display: block;
 }
 
-.ecom-banner-mobile {
-    display: none;
+.ecom-banner__bottom {
+    position: relative;
 }
 
-.ecom-banner-top,
-.ecom-banner-bottom,
-.ecom-banner-mobile-img {
+.ecom-banner__bottom-image img {
     width: 100%;
     display: block;
 }
 
-.ecom-banner-bottom-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.ecom-banner-text {
+.ecom-banner__text {
     position: absolute;
     left: 5%;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #000;
-    max-width: 40%;
-}
-
-.ecom-kicker {
-    letter-spacing: .15em;
-    font-weight: 600;
-    text-transform: uppercase;
-    opacity: .8;
-    margin: 0 0 6px;
-}
-
-.ecom-heading {
-    font-size: clamp(32px, 5vw, 64px);
-    line-height: 1.1;
-    margin: 0 0 10px;
-}
-
-.ecom-subheading {
-    max-width: 65ch;
-    opacity: .95;
-    margin: 0 0 12px;
-}
-
-.ecom-btn {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 18px;
-    border-radius: 999px;
-    border: 1px solid currentColor;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.ecom-btn--fill {
-    background: currentColor;
+    bottom: 10%;
     color: #fff;
-    border-color: transparent;
+    max-width: 400px;
 }
 
-.ecom-btn--shine::after {
-    content: "";
-    position: absolute;
-    inset: auto -150% 0 auto;
-    width: 50%;
-    height: 100%;
-    transform: skewX(-20deg) translateX(-120%);
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent);
-    transition: transform .6s ease;
+.ecom-banner__text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
-.ecom-btn--shine:hover::after {
-    transform: skewX(-20deg) translateX(260%);
+.ecom-banner__text p {
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
-/* ==== Grid ==== */
-.ecom-grid__title {
-    margin: 24px 0;
-}
-
-.ecom-grid__wrap {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}
-
-@media (max-width: 900px) {
-    .ecom-grid__wrap {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 560px) {
-    .ecom-grid__wrap {
-        grid-template-columns: 1fr;
-    }
-}
-
-.ecom-card {
-    width: 433px;
-    height: 444px;
-    overflow: hidden;
-    background: #fff;
-}
-.ecom-card__media {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.ecom-card__media img {
-    width: 100%;
-    height: 100%;
-    /* height: auto; */
-    display: block;
-    transition: transform .3s ease;
-}
-.ecom-card__info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 12px;
-  background: rgba(255,255,255,0.9);
-  display: grid;
-  gap: 6px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-}
-
-.ecom-card:hover .ecom-card__media img {
-    transform: scale(1.04);
-}
-
-.ecom-card__info {
-    padding: 12px;
-    display: grid;
-    gap: 6px;
-}
-
-
-/* ==== Modal ==== */
-.ecom-modal[hidden] {
+.ecom-banner__mobile {
     display: none;
 }
 
-.ecom-modal {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-}
-
-.ecom-modal__backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, .52);
-}
-
-.ecom-modal__dialog {
-    position: relative;
-    z-index: 1;
-    background: #fff;
-    color: #111;
-    width: min(920px, calc(100% - 24px));
-    margin: 6vh auto;
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: 24px;
-    border-radius: 18px;
-    padding: 24px;
-}
-
-@media (max-width: 760px) {
-    .ecom-modal__dialog {
-        grid-template-columns: 1fr;
-    }
-}
-
-.ecom-modal__close {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: transparent;
-    border: 0;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.ecom-modal__left img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
-.ecom-modal__title {
-    margin: 0 0 8px;
-}
-
-.ecom-modal__price {
-    margin: 0 0 8px;
-    font-weight: 600;
-}
-
-.ecom-modal__desc {
-    margin: 0 0 12px;
-    color: #444;
-    max-height: 6lh;
-    overflow: auto;
-}
-
-.ecom-modal__options {
-    display: grid;
-    gap: 12px;
-    margin: 12px 0 16px;
-}
-
-.ecom-option {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-}
-
-.ecom-swatch, .ecom-chip {
-    border: 1px solid rgba(0, 0, 0, .2);
-    padding: 8px 12px;
-    border-radius: 999px;
-    cursor: pointer;
-    background: #fff;
-}
-
-.ecom-chip[aria-pressed="true"], .ecom-swatch[aria-pressed="true"] {
-    border-color: #111;
-    font-weight: 600;
-}
-
-.ecom-modal__status {
-    margin-top: 8px;
-    min-height: 1em;
-}
-
-/* ==== Mobile banner only ==== */
-@media (max-width: 768px) {
-    .ecom-banner-desktop {
+@media(max-width: 768px) {
+    .ecom-banner__desktop {
         display: none;
     }
 
-    .ecom-banner-mobile {
+    .ecom-banner__mobile {
         display: block;
-        position: relative;
-        text-align: center;
     }
 
-    .ecom-banner-text-mobile {
-        position: absolute;
-        bottom: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-        color: #fff;
-        padding: 0 15px;
-        max-width: 90%;
+    .ecom-banner__mobile img {
+        width: 100%;
+        display: block;
     }
+}
 
-    .ecom-banner-text-mobile h2 {
-        font-size: 1.5rem;
-        margin-bottom: 8px;
-    }
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(433px, 1fr));
+    gap: 20px;
+}
 
-    .ecom-banner-text-mobile p {
-        font-size: 1rem;
-        line-height: 1.4;
-    }
+.product-card {
+    width: 433px;
+    height: 444px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.product-card .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

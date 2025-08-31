@@ -1,64 +1,22 @@
-<section class="page-width"
-  data-section-type="ecom-product-grid"
-  data-section-id="{{ section.id }}"
->
-  {% if section.settings.title != blank %}
-    <h2 class="ecom-grid__title">{{ section.settings.title }}</h2>
-  {% endif %}
-
-  <div class="ecom-grid__wrap">
-    {%- for block in section.blocks -%}
-      {%- assign p = block.settings.product -%}
-      {%- if p -%}
-      <article class="ecom-card" {{ block.shopify_attributes }}>
-        <button type="button" class="ecom-card__btn" data-handle="{{ p.handle }}" aria-label="{{ p.title }}">
-          <div class="ecom-card__media">
-            {%- if p.featured_media -%}
-              {{ p.featured_media | image_url: width: 433 | image_tag: loading: 'lazy', alt: p.title }}
-            {%- endif -%}
-          </div>
-        </button>
-        <script type="application/json" class="ProductJson" data-handle="{{ p.handle }}">{{ p | json }}</script>
-      </article>
-      {%- endif -%}
-    {%- endfor -%}
-  </div>
-
-  {%- if section.settings.auto_add_product -%}
-    <script type="application/json" id="AutoProductJson-{{ section.id }}">{{ section.settings.auto_add_product | json }}</script>
-  {%- endif -%}
-
-  <!-- Modal -->
-  <div class="ecom-modal" id="EcomModal-{{ section.id }}" hidden>
-    <div class="ecom-modal__backdrop" data-close></div>
-    <div class="ecom-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="EcomModalTitle-{{ section.id }}">
-      <button class="ecom-modal__close" data-close>&times;</button>
-      <div class="ecom-modal__left"><img alt=""></div>
-      <div class="ecom-modal__right">
-        <h3 class="ecom-modal__title" id="EcomModalTitle-{{ section.id }}"></h3>
-        <p class="ecom-modal__price"></p>
-        <p class="ecom-modal__desc"></p>
-        <div class="ecom-modal__options"></div>
-        <div class="ecom-modal__status"></div>
-        <button class="ecom-btn ecom-btn--fill" data-add>Add to cart</button>
+<section class="ecom-product-grid">
+  <div class="product-grid">
+    {% for product in collections.all.products limit: section.settings.products_to_show %}
+      <div class="product-card">
+        <div class="product-image">
+          <img src="{{ product.featured_image | image_url: width: 433, height: 444, crop: 'center' }}" alt="{{ product.title }}">
+        </div>
       </div>
-    </div>
+    {% endfor %}
   </div>
-
-  <script src="{{ 'ecom-grid.js' | asset_url }}" defer></script>
 </section>
 
 {% schema %}
 {
   "name": "Ecom Product Grid",
   "settings": [
-    { "type":"text", "id":"title", "label":"Title", "default":"Featured Products" },
-    { "type":"product", "id":"auto_add_product", "label":"Auto-add product (Soft Winter Jacket)" }
+    { "type": "text", "id": "title", "label": "Title", "default": "Featured Products" },
+    { "type": "range", "id": "products_to_show", "label": "Number of Products", "default": 8, "min": 2, "max": 20, "step": 1 }
   ],
-  "blocks": [
-    { "type":"product", "name":"Product", "settings":[ { "type":"product", "id":"product", "label":"Product" } ] }
-  ],
-  "max_blocks": 6,
-  "presets": [ { "name": "Ecom Product Grid" } ]
+  "presets": [{ "name": "Ecom Product Grid" }]
 }
 {% endschema %}
