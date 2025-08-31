@@ -1,76 +1,61 @@
 <div class="ecom-banner">
-  <!-- Top Banner (Desktop only) -->
-  {% if section.settings.top_image != blank %}
-    <div class="banner-desktop-top small-hide">
-      <img 
-        src="{{ section.settings.top_image | img_url: 'master' }}" 
-        alt="Top Banner" 
-        class="w-full h-auto"
-      >
-    </div>
-  {% endif %}
+  <!-- DESKTOP -->
+  <div class="ecom-banner-desktop">
+    {% if section.settings.top_image %}
+      {{ section.settings.top_image | image_url: width: 2400 | image_tag: class: 'ecom-banner-top', alt: 'Top banner' }}
+    {% endif %}
 
-  <!-- Bottom Banner with Text (Desktop only) -->
-  <div class="banner-desktop-bottom small-hide">
-    <div class="banner-left-text">
-      {% if section.settings.banner_text != blank %}
-        <h2>{{ section.settings.banner_text }}</h2>
+    <div class="ecom-banner-bottom-wrapper">
+      {% if section.settings.bottom_image %}
+        {{ section.settings.bottom_image | image_url: width: 2400 | image_tag: class: 'ecom-banner-bottom', alt: 'Bottom banner' }}
       {% endif %}
-    </div>
-    <div class="banner-right-img">
-      {% if section.settings.bottom_image != blank %}
-        <img 
-          src="{{ section.settings.bottom_image | img_url: 'master' }}" 
-          alt="Bottom Banner" 
-          class="w-full h-auto"
-        >
-      {% endif %}
+
+      <div class="ecom-banner-text">
+        {% if section.settings.kicker != blank %}
+          <p class="ecom-kicker">{{ section.settings.kicker }}</p>
+        {% endif %}
+        <h2 class="ecom-heading">{{ section.settings.heading }}</h2>
+        {% if section.settings.subheading != blank %}
+          <p class="ecom-subheading">{{ section.settings.subheading }}</p>
+        {% endif %}
+        {% if section.settings.cta_label != blank %}
+          <a href="{{ section.settings.cta_link }}" class="ecom-btn ecom-btn--fill ecom-btn--shine">{{ section.settings.cta_label }}</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 
-  <!-- Mobile Banner -->
-  {% if section.settings.mobile_image != blank %}
-    <div class="banner-mobile large-up-hide">
-      <img 
-        src="{{ section.settings.mobile_image | img_url: 'master' }}" 
-        alt="Mobile Banner" 
-        class="w-full h-auto"
-      >
+  <!-- MOBILE (single image + text) -->
+  <div class="ecom-banner-mobile">
+    {% assign mob_img = section.settings.mobile_image | default: section.settings.bottom_image | default: section.settings.top_image %}
+    {% if mob_img %}
+      {{ mob_img | image_url: width: 1400 | image_tag: class: 'ecom-banner-mobile-img', alt: 'Banner' }}
+    {% endif %}
+    <div class="ecom-banner-text-mobile">
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.cta_label != blank %}
+        <a href="{{ section.settings.cta_link }}" class="ecom-btn ecom-btn--fill ecom-btn--shine">{{ section.settings.cta_label }}</a>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "Ecom Banner",
   "settings": [
-    {
-      "type": "image_picker",
-      "id": "top_image",
-      "label": "Top Banner Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "bottom_image",
-      "label": "Bottom Banner Image"
-    },
-    {
-      "type": "image_picker",
-      "id": "mobile_image",
-      "label": "Mobile Banner Image"
-    },
-    {
-      "type": "text",
-      "id": "banner_text",
-      "label": "Banner Text",
-      "default": "Find the ideal gift for your loved ones."
-    }
+    { "type": "image_picker", "id": "top_image", "label": "Top image" },
+    { "type": "image_picker", "id": "bottom_image", "label": "Bottom image" },
+    { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)" },
+    { "type": "text", "id": "kicker", "label": "Top label (red box 1)", "default": "NEW COLLECTION" },
+    { "type": "text", "id": "heading", "label": "Main heading (red box 2)", "default": "The Gift Guide" },
+    { "type": "textarea", "id": "subheading", "label": "Subtitle (red box 3)", "default": "Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated selection and find the perfect gifts to delight your loved ones this holiday season." },
+    { "type": "text", "id": "cta_label", "label": "Primary button text", "default": "Shop now" },
+    { "type": "url", "id": "cta_link", "label": "Primary button link", "default": "/" }
   ],
-  "presets": [
-    {
-      "name": "Ecom Banner",
-      "category": "Custom Sections"
-    }
-  ]
+  "presets": [{ "name": "Ecom Banner" }]
 }
 {% endschema %}
