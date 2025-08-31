@@ -86,4 +86,9 @@
     width: 169px;
     height: 186px;
   }
+  .text-tisso{
+    font-size: 24px;
+    line-height: 120%;
+    text-align: center;
+  }
 }
