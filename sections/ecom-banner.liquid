@@ -1,65 +1,109 @@
-<div class="ecom-banner__bottom ecom-split">
-  <div class="ecom-split__left">
-    <div class="ecom-banner__content">
-      {% if section.settings.kicker != blank %}
-        <p class="ecom-banner__kicker">{{ section.settings.kicker }}</p>
-      {% endif %}
-      {% if section.settings.heading != blank %}
-        <h2 class="ecom-banner__heading">{{ section.settings.heading }}</h2>
-      {% endif %}
-      {% if section.settings.subheading != blank %}
-        <div class="ecom-banner__sub rte">{{ section.settings.subheading }}</div>
-      {% endif %}
-      {% if section.settings.bottom_cta_label != blank %}
-        <a class="ecom-banner__cta cta-anim" href="{{ section.settings.bottom_cta_url }}">
-          {{ section.settings.bottom_cta_label }} <span class="cta-anim__arrow">→</span>
-        </a>
-      {% endif %}
-      {% if section.settings.ribbon_text != blank %}
-        <div class="ecom-banner__ribbon">{{ section.settings.ribbon_text }}</div>
-      {% endif %}
+<section id="ecom-banner-{{ section.id }}" class="homepage-banner">
+  
+  <!-- Top Header Bar -->
+  <div class="banner-topbar">
+    <div class="topbar-left">TISSO VISON</div>
+    <div class="topbar-center">Find the ideal gift for your loved ones.</div>
+    <div class="topbar-right">
+      <a href="/collections/all" class="btn-yellow">CHOOSE GIFT →</a>
     </div>
   </div>
 
-  <div class="ecom-split__right">
-    {% if section.settings.bottom_image %}
-      <img class="ecom-banner__img" src="{{ section.settings.bottom_image | image_url: width: 3200 }}" alt="{{ section.settings.bottom_image.alt | escape }}">
-    {% endif %}
+  <!-- Hero Banner Section -->
+  <div class="banner-hero">
+    <div class="banner-content">
+      <h1 class="hero-heading">The Gift Guide</h1>
+      <p class="hero-text">
+        Discover Joy: Your Ultimate Holiday Gift Destination. Explore our curated 
+        selection and find the perfect gifts to delight your loved ones this holiday season.
+      </p>
+      <a href="/collections/all" class="btn-black">SHOP NOW →</a>
+    </div>
   </div>
-</div>
 
+  <!-- Footer Strip -->
+  <div class="banner-footer">
+    SUSTAINABLE, ETHICALLY MADE CLOTHES IN SIZES XXS TO 6XL
+  </div>
+
+</section>
 
 <style>
-/* Split layout for bottom area */
-#ecom-banner-{{ section.id }} .ecom-split{
-  display:grid;
-  grid-template-columns: 1fr 1fr; /* left text | right image */
-  align-items: end;
-  gap: clamp(12px,2.4vw,28px);
-  position: relative;
+/* -------- TOP HEADER BAR -------- */
+.banner-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+  font-size: 1rem;
+  background: #fff;
+  border-bottom: 1px solid #eee;
 }
-#ecom-banner-{{ section.id }} .ecom-split__left{ padding-left: 3%; padding-bottom: 3%; }
-#ecom-banner-{{ section.id }} .ecom-split__right{
-  position: relative;
+.topbar-left { font-weight: bold; font-size: 1.2rem; }
+.topbar-center { text-align: center; flex: 1; color: #333; }
+.topbar-right { text-align: right; }
+
+/* Buttons */
+.btn-yellow {
+  background: #FFD700;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
 }
-#ecom-banner-{{ section.id }} .ecom-split__right .ecom-banner__img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* keep image contained to right half */
-  object-position: center;
-  display:block;
+.btn-yellow:hover { background: #e6c200; }
+.btn-black {
+  background: #000;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+}
+.btn-black:hover { background: #333; }
+
+/* -------- HERO SECTION -------- */
+.banner-hero {
+  background: url('{{ "4.webp" | file_url }}') center/cover no-repeat; 
+  text-align: center;
+  padding: 80px 20px;
+}
+.banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #000;
+}
+.hero-text {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #444;
 }
 
-/* Remove absolute overlay used earlier so text sits in left column */
-#ecom-banner-{{ section.id }} .ecom-banner__content{ position: static; max-width: 560px; }
+/* -------- FOOTER STRIP -------- */
+.banner-footer {
+  text-align: center;
+  padding: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
 
-/* Mobile stacks */
-@media (max-width: 990px){
-  #ecom-banner-{{ section.id }} .ecom-split{
-    grid-template-columns: 1fr;
+/* -------- RESPONSIVE -------- */
+@media (max-width: 768px) {
+  .banner-topbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
   }
-  #ecom-banner-{{ section.id }} .ecom-split__left{ order: 2; padding: 16px var(--pad) 28px; }
-  #ecom-banner-{{ section.id }} .ecom-split__right{ order: 1; }
+  .hero-heading { font-size: 2rem; }
+  .hero-text { font-size: 1rem; }
 }
-
 </style>
