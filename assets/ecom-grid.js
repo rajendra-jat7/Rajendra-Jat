@@ -1,3 +1,4 @@
+// @ts-nocheck
 (function () {
   const money = (cents) => {
     try {
