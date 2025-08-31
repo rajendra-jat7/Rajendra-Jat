@@ -171,58 +171,40 @@
   justify-content: center;
 }
 
-/* Mobile Responsive */
+/* Mobile Specific Fixes */
 @media screen and (max-width: 768px) {
-  /* Hide top banner */
-  .top-banner-container {
-    display: none;
+  /* Hide "Find the ideal gift..." */
+  .header-text, .header-right {
+    display: none !important;
   }
 
-  /* Bottom container stacked */
+  /* Banner text reposition */
   .bottom-banner-container {
-    flex-direction: column;
+    position: relative;
     text-align: center;
-    height: auto;
-    padding: 10px;
   }
 
-  /* Text block above image */
-  .bottom-text {
-    padding: 0 15px;
-    margin-bottom: 15px;
-  }
-  .bottom-text h1 {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-  }
-  .bottom-text p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
-  }
-
-  /* Shop button centered */
+  /* SHOP NOW overlay on image */
   .btn-black {
-    margin: 0 auto 15px auto;
-    display: inline-block;
+    position: absolute;
+    bottom: 20px;   /* adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    z-index: 2;
   }
 
-  /* Image full width */
+  /* Ensure image is behind */
   .bottom-right-img {
     width: 100%;
-    max-width: 100%;
     height: auto;
-    object-fit: contain;
+    display: block;
   }
 
-  /* Sustainability strip */
-  .sustain-strip {
-    height: auto;
-    padding: 8px;
-  }
-  .sustain-strip p {
-    font-size: 12px;
-    text-align: center;
+  /* Move heading + paragraph above image */
+  .bottom-text {
+    padding: 15px;
+    margin-bottom: 0;
   }
 }
 
