@@ -50,6 +50,10 @@
 }
 
 /* Product Grid */
+.ecom-product-grid{
+    padding: 20px 0;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(433px, 1fr));
