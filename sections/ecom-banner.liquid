@@ -148,11 +148,15 @@
   height: 100%;
   background: white;
   z-index: 9999;
-  display: flex;
+  display: none; /* <-- default hidden */
   flex-direction: column;
   align-items: center;
   justify-content: start;
   padding: 30px 20px;
+}
+
+.hb-overlay.active {
+  display: flex; /* <-- visible only when active */
 }
 
 .hb-close {
@@ -219,12 +223,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn = document.getElementById("hbCloseBtn");
 
   menuBtn.addEventListener("click", () => {
-    overlay.hidden = false;
+    overlay.classList.add("active");
     menuBtn.style.display = "none";
   });
 
   closeBtn.addEventListener("click", () => {
-    overlay.hidden = true;
+    overlay.classList.remove("active");
     menuBtn.style.display = "block";
   });
 });
