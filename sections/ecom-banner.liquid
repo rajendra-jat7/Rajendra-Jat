@@ -258,6 +258,10 @@
   .hb-hamburger, .hb-close {
     display: block;
     position: absolute;
+    font-size : 28px;
+    background : none;
+    border: none;
+    cursor : pointer;
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
@@ -360,11 +364,13 @@ document.addEventListener("DOMContentLoaded", () => {
   menuBtn.addEventListener("click", () => {
     overlay.classList.add("active");
     menuBtn.style.display = "none";
+    closeBtn.style.display = "block";   // <-- close button show karo
   });
 
   closeBtn.addEventListener("click", () => {
     overlay.classList.remove("active");
-    menuBtn.style.display = "block";
+    closeBtn.style.display = "none";    // <-- close button hide karo
+    menuBtn.style.display = "block";    // <-- hamburger wapas show karo
   });
 });
 </script>
