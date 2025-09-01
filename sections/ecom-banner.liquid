@@ -26,33 +26,23 @@
   <div class="top-header-bar">
     <button id="hbMenuBtn" class="hb-hamburger" aria-label="Open menu">&#9776;</button>
     <button id="hbCloseBtn" class="hb-close" aria-label="Close menu">&times;</button>
+    
     <div class="header-left">
       {% if section.settings.header-left != blank %}
         <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
              alt="Header Left" 
              class="header-left-img">
+      {% else %}
+        <span class="header-title">TISSO VISON</span>
       {% endif %}
-    </div>
-    <div class="header-center">Find the ideal gift for your loved ones.</div>
-    <div class="header-right">
-      <a href="#" class="btn-yellow">CHOOSE GIFT →</a>
     </div>
   </div>
 
-<!-- Fullscreen Menu Overlay -->
-<div id="hbOverlay" class="hb-overlay">
-  <div class="hb-overlay-content">
-    <div class="overlay-logo">
-      {% if section.settings.header-left != blank %}
-        <img src="{{ section.settings.header-left | image_url: width: 152 }}" 
-             alt="Header Logo" 
-             class="header-left-img">
-      {% endif %}
-    </div>
+  <!-- Mobile Dropdown -->
+  <div id="hbDropdown" class="hb-dropdown">
     <p class="overlay-text">Find the ideal gift for your loved ones.</p>
     <a href="#" class="btn-yellow overlay-btn">CHOOSE GIFT →</a>
   </div>
-</div>
 
   <!-- Banner Content -->
   <div class="banner-content">
